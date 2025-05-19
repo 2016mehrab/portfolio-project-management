@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Log;
+use Storage;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         //
-        $projects =Project::orderBy('created_at', 'desc')->paginate(6) ;
+        $projects = Project::orderBy('created_at', 'desc')->paginate(6);
         return view('project.index', compact('projects'));
     }
 
@@ -39,8 +40,8 @@ class ProjectController extends Controller
             'project_url' => 'nullable|url',
             'description' => 'nullable|string',
         ]);
-        $imagePath = $request->file('image_path')->store('images','public');
-        $data['image_path']=$imagePath;
+        $imagePath = $request->file('image_path')->store('images', 'public');
+        $data['image_path'] = $imagePath;
         Log::info('Validated input data:', $data);
         Project::create($data);
         return redirect()->route('project.index')->with('success', 'Project created!');
@@ -70,7 +71,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'image_path' => 'sometimes|required|image|mimes:jpeg,png,jpg|max:5120',
+            'status' => 'sometimes|required|in:draft,published',
+            'project_url' => 'nullable|url',
+            'description' => 'nullable|string',
+        ]);
+        // remove existing one
+        if ($request->hasFile('image_path')) {
+            if ($project->image_path && Storage::disk('public')->exists($project->image_path)) {
+                Storage::disk('public')->delete($project->image_path);
+            }
+            $data['image_path'] = $request->file('image_path')->store('images', 'public');
+        } else {
+            $data['image_path'] = $project->image_path;
+        }
+
+
+        $project->update($data);
+        return redirect()->route('project.index')->with('success', 'Project updated Successfully');
     }
 
     /**
