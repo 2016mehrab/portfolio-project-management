@@ -5,7 +5,6 @@
     <div class="container my-4">
         <h1 class="mb-4">All Projects</h1>
 
-        <a href="{{ route('project.create') }}" class="btn btn-primary mb-4">Add New Project</a>
 
         @if ($projects->isEmpty())
             <p class="text-muted">No projects found.</p>
@@ -18,9 +17,8 @@
 
                                 @if ($project->image_path)
                                     <div style="height: 400px; overflow: hidden;">
-                                        <img src="{{ asset('storage/' . $project->image_path) }}"
-                                            alt="{{ $project->title }}" class="w-100"
-                                            style="height: 100%; object-fit: cover;">
+                                        <img src="{{ asset('storage/' . $project->image_path) }}" alt="{{ $project->title }}"
+                                            class="w-100" style="height: 100%; object-fit: cover;">
                                     </div>
                                 @endif
 
@@ -50,6 +48,11 @@
             <div class="mt-4">
                 {{ $projects->links() }}
             </div>
+            <a href="{{ route('project.create') }}"
+                class="btn btn-primary rounded-circle shadow position-fixed bottom-0 end-0 m-4 p-0 d-flex align-items-center justify-content-center"
+                style="width: 60px; height: 60px;">
+                <span class="fs-2">+</span>
+            </a>
         @endif
     </div>
 @endsection
