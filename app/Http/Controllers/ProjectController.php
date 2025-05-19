@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Log;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         //
-        $projects =[];
+        $projects = [];
         return view('project.index', compact('projects'));
     }
 
@@ -31,7 +32,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'status' => 'required|in:draft,published',
+            'project_url' => 'nullable|url',
+            'description' => 'nullable|string',
+        ]);
+        Log::info('Validated input data:', $data);
+        return redirect()->route('project.index')->with('success', 'Project created!');
+
     }
 
     /**
@@ -40,7 +50,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         //
-        return view('project.show',compact('project'));
+        return view('project.show', compact('project'));
     }
 
     /**
