@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - ${DB_PORT}:5432
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8889:8080
+    depends_on:
+      - db
