@@ -2,12 +2,19 @@ services:
   db:
     image: postgres:latest
     ports:
-      - ${DB_PORT}:5432
+      - ${DB_PORT}:${DB_PORT}
     restart: always
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USERNAME}"]
+      interval: 15s
+      timeout: 15s
+      retries: 5
 
 
   adminer:
@@ -17,3 +24,28 @@ services:
       - 8889:8080
     depends_on:
       - db
+  app:
+    build:
+      context: .
+      target: php
+      args: 
+        - APP_ENV=${APP_ENV}
+      dockerfile: Dockerfile
+    working_dir: /var/www
+    ports:
+      - 8000:8000
+
+    environment:
+      - APP_ENV=${APP_ENV}
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE="${DB_DATABASE}"
+      - DB_USERNAME="${DB_USERNAME}"
+      - DB_PASSWORD="${DB_PASSWORD}"
+    depends_on:
+      db:
+        condition: service_healthy
+      
+    restart: unless-stopped
+volumes:
+  postgres_data:
