@@ -39,7 +39,10 @@ class ProjectController extends Controller
             'project_url' => 'nullable|url',
             'description' => 'nullable|string',
         ]);
+        $imagePath = $request->file('image_path')->store('images','public');
+        $data['image_path']=$imagePath;
         Log::info('Validated input data:', $data);
+        Project::create($data);
         return redirect()->route('project.index')->with('success', 'Project created!');
 
     }
