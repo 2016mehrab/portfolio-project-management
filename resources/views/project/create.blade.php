@@ -10,23 +10,23 @@
             <input name="title" id="title" type='text' value="{{ old('title') }}"
                 class="form-control @error('title') border-red-500 @enderror">
             @error('title')
-                <p class="text-red-500 text-sm mt-1">
+
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
         </div>
         <div class="mb-4 ">
+
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="title" type='text' class="form-control">
-                {{ old('description') }}
-            </textarea>
+            <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
         </div>
         <div class="mb-4">
             <label for="project_url" class="form-label">Project URL</label>
             <input type="url" id="project_url" name='project_url' value="{{ old('project_url') }}"
                 class="form-control @error('project_url') border-red-500 @enderror">
             @error('project_url')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
@@ -37,7 +37,7 @@
                 class="form-control @error('image_path') border-red-500 @enderror">
             <div class="form-text">Maximum file size 5MB.</div>
             @error('image_path')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
@@ -50,7 +50,7 @@
                 <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}> Published</option>
             </select>
             @error('status')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
