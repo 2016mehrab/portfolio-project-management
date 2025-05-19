@@ -11,23 +11,22 @@
             <input name="title" id="title" type='text' value="{{ old('title', $project->title) }}"
                 class="form-control @error('title') border-red-500 @enderror">
             @error('title')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
         </div>
         <div class="mb-4 ">
+
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="title" type='text' class="form-control">
-                {{ old('description',$project->description) }}
-            </textarea>
+            <textarea name="description" id="description" class="form-control">{{ old('description', $project->description) }}</textarea>
         </div>
         <div class="mb-4">
             <label for="project_url" class="form-label">Project URL</label>
             <input type="url" id="project_url" name='project_url' value="{{ old('project_url',$project->project_url) }}"
                 class="form-control @error('project_url') border-red-500 @enderror">
             @error('project_url')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
@@ -37,13 +36,13 @@
             <input type="file" id="image_path" name='image_path' value="{{ old('image_path',$project->image_path) }}"
                 class="form-control @error('image_path') border-red-500 @enderror">
             <div class="form-text mb-4">Maximum file size 5MB.</div>
-            <p class="">Current: </p>
-<img src="{{asset('storage/'.$project->image_path)}}" alt="Current Image" class="">
             @error('image_path')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
+            <p class="">Current: </p>
+<img src="{{asset('storage/'.$project->image_path)}}" alt="Current Image" class="">
         </div>
         <div class="mb-4">
             <label for="status" class="form-label">Status</label>
@@ -53,7 +52,7 @@
                 <option value="published" {{ old('status',$project->status) == 'published' ? 'selected' : '' }}> Published</option>
             </select>
             @error('status')
-                <p class="text-red-500 text-sm mt-1">
+                <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
