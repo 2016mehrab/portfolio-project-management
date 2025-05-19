@@ -34,9 +34,10 @@
                                     @else
                                         <span class="badge text-bg-secondary text-capitalize">{{ $project->status }}</span>
                                     @endif
-                                    @if ($project->project_url)
+                                    @if ($project->project_url && $project->status == 'published')
                                         <a href="{{ $project->project_url }}" class="btn btn-sm btn-outline-primary"
                                             target="_blank">Visit</a>
+                                    @else
                                     @endif
                                 </div>
                             </a>
