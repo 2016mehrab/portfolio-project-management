@@ -40,7 +40,7 @@ Follow these steps to set up and run the application using Docker.
 3. **Start Docker**:
    - Build and run the services:
      ```bash
-     docker compose up -d --build
+     docker compose up --build
      ```
    - **Note**: The first build may take a few minutes, depending on your internet speed.
    - This command builds the `app` service (PHP), starts the PostgreSQL database (`db`), and runs Adminer.
