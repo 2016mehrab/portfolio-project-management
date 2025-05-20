@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
         //
         $projects = Project::orderBy('created_at', 'desc')->paginate(6);
-        return view('project.index', compact('projects'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('project.create');
+        return view('projects.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:draft,published',
             'project_url' => 'nullable|url',
             'description' => 'nullable|string',
@@ -44,7 +44,7 @@ class ProjectController extends Controller
         $data['image_path'] = $imagePath;
         Log::info('Validated input data:', $data);
         Project::create($data);
-        return redirect()->route('project.index')->with('success', 'Project created!');
+        return redirect()->route('projects.index')->with('success', 'Project created!');
 
     }
 
@@ -54,7 +54,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         //
-        return view('project.show', compact('project'));
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -63,7 +63,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         //
-        return view('project.edit', compact('project'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -90,7 +90,7 @@ class ProjectController extends Controller
 
 
         $project->update($data);
-        return redirect()->route('project.index')->with('success', 'Project updated Successfully');
+        return redirect()->route('projects.index')->with('success', 'Project updated Successfully');
     }
 
     /**
@@ -102,6 +102,6 @@ class ProjectController extends Controller
             Storage::disk('public')->delete($project->image_path);
         }
         $project->delete();
-        return redirect()->route('project.index')->with('success', 'Project Deleted');
+        return redirect()->route('projects.index')->with('success', 'Project Deleted');
     }
 }

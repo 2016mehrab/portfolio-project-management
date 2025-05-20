@@ -13,7 +13,7 @@
                 @foreach ($projects as $project)
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <a href="{{ route('project.show', $project) }}" class="text-decoration-none text-dark">
+                            <a href="{{ route('projects.show', $project) }}" class="text-decoration-none text-dark">
 
                                 @if ($project->image_path)
                                     <div style="height: 400px; overflow: hidden;">
@@ -49,7 +49,7 @@
             <div class="mt-4">
                 {{ $projects->links() }}
             </div>
-            <a href="{{ route('project.create') }}"
+            <a href="{{ route('projects.create') }}"
                 class="btn btn-primary rounded-circle shadow position-fixed bottom-0 end-0 m-4 p-0 d-flex align-items-center justify-content-center"
                 style="width: 60px; height: 60px;">
                 <span class="fs-2">+</span>

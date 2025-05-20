@@ -2,7 +2,7 @@
 @section('title', 'Add project')
 @section('content')
     <h1 class="text-2xl mb-4">Add project</h1>
-    <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data"
         class="bg-white p-4 rounded border">
         @csrf
         <div class="mb-4">
@@ -35,7 +35,7 @@
             <label for="image_path" class="form-label">Image</label>
             <input type="file" id="image_path" name='image_path' value="{{ old('image_path') }}"
                 class="form-control @error('image_path') border-red-500 @enderror">
-            <div class="form-text">Maximum file size 5MB.</div>
+            <div class="form-text">Maximum file size 2MB.</div>
             @error('image_path')
                 <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}

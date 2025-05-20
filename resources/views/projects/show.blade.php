@@ -34,10 +34,10 @@
             </div>
 
             <div class="card-footer d-flex gap-2 flex-wrap">
-                <a href="{{ route('project.index') }}" class="btn btn-outline-secondary">Back to Projects</a>
-                <a href="{{ route('project.edit', $project) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('projects.index') }}" class="btn btn-outline-secondary">Back to Projects</a>
+                <a href="{{ route('projects.edit', $project) }}" class="btn btn-primary">Edit</a>
 
-                <form action="{{ route('project.destroy', $project) }}" method="POST"
+                <form action="{{ route('projects.destroy', $project) }}" method="POST"
                     onsubmit="return confirm('Are you sure you want to delete this project?')">
                     @csrf
                     @method('DELETE')

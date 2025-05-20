@@ -2,7 +2,7 @@
 @section('title', 'Edit project')
 @section('content')
     <h1 class="text-2xl mb-4">Edit project</h1>
-    <form action="{{ route('project.update',$project) }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('projects.update',$project) }}" method="POST" enctype="multipart/form-data"
         class="bg-white p-4 rounded border">
         @csrf
         @method('PUT')
@@ -35,14 +35,19 @@
             <label for="image_path" class="form-label">Image</label>
             <input type="file" id="image_path" name='image_path' value="{{ old('image_path',$project->image_path) }}"
                 class="form-control @error('image_path') border-red-500 @enderror">
-            <div class="form-text mb-4">Maximum file size 5MB.</div>
+            <div class="form-text mb-4">Maximum file size 2MB.</div>
             @error('image_path')
                 <p class="alert alert-danger d-flex align-items-center" role="alert">
                     {{ $message }}
                 </p>
             @enderror
             <p class="">Current: </p>
-<img src="{{asset('storage/'.$project->image_path)}}" alt="Current Image" class="">
+
+                <div class="mb-4 d-flex justify-content-center align-items-center bg-light overflow-hidden"
+                    style="max-height: 400px;">
+                    <img src="{{ asset('storage/' . $project->image_path) }}" alt="current image" class="img-fluid object-fit-contain"
+                        >
+                </div>
         </div>
         <div class="mb-4">
             <label for="status" class="form-label">Status</label>

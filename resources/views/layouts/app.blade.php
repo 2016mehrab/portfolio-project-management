@@ -20,11 +20,11 @@
                           <ul class="navbar-nav ms-auto fw-semibold">
                               <li class="nav-item">
 
-                                <a class="nav-link text-white {{ request()->routeIs('project.index') ? 'bg-white bg-opacity-25 rounded fw-bold' : '' }}" 
-   href="{{ route('project.index') }}">Projects</a>
+                                <a class="nav-link text-white {{ request()->routeIs('projects.index') ? 'bg-white bg-opacity-25 rounded fw-bold' : '' }}" 
+   href="{{ route('projects.index') }}">Projects</a>
                               </li>
                               <li class="nav-item ">
-                                <a href="{{route('project.create')}}" class="nav-link {{request()->routeIs('project.create') ? "bg-white bg-opacity-25 rounded fw-bold": ""}} text-white">Create</a>
+                                <a href="{{route('projects.create')}}" class="nav-link {{request()->routeIs('projects.create') ? "bg-white bg-opacity-25 rounded fw-bold": ""}} text-white">Create</a>
                               </li>
                           </ul>
                       </div>
