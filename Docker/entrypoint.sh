@@ -16,6 +16,11 @@ if [ ! -f "vendor/autoload.php" ]; then
     composer install --optimize-autoloader --no-interaction --no-dev
 fi
 # if [ ! -f ".env" ]; then
+if [ ! -f "node_modules/.package-lock.json" ]; then
+    npm install
+fi
+
+npm run build
 echo "Creating env file for $APP_ENV"
 cp .env.example .env
 # fi
