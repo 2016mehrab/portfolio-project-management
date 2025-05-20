@@ -1,4 +1,4 @@
-# Laravel Portfolio Project Management Application
+# Portfolio Projects – CRUD Application
 
 A Laravel 12 application for managing portfolio projects with full CRUD operations, built with Bootstrap 5 and PostgreSQL in a fully Dockerized environment.
 
@@ -11,8 +11,8 @@ Follow these steps to set up and run the application using Docker.
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/2016mehrab/portfolio-project-management
-   cd portfolio-project-management
+   git clone https://github.com/2016mehrab/portfolio-projects-crud-application
+   cd portfolio-projects-crud-application
    ```
 
 2 **Ports**:
